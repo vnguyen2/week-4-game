@@ -28,18 +28,22 @@ body {
 }
 
 .button-primary {
-    align-self: center;
     margin-top: 10px;
+    margin: 20px auto;
 }
+
+#battle {
+    visibility: hidden;
+}
+
 .battleRow {
     margin-top: 40px;
 }
 .battleMsg {
-    font-size: 10px;
-    background-color: 4b0082;
+    font-size: 11px;
+    background-color: black;
     text-align: center;
 }
-
 .userPokemon{
     align: center;
 }
@@ -50,8 +54,8 @@ body {
 }
 
 .pokemon {
-    width:120px;
-    margin: 15px 15px;
+    width: 120px;
+    margin: 10px 10px;
 }
 
 #pikachuHealth, #squirtleHealth, #charmanderHealth, #bulbasaurHealth {

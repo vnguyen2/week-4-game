@@ -31,6 +31,8 @@ var characters = {
 	attack: 25,
 	}
 };
+//hide attack button until ready to battle
+// $('.button-primary').hide();
 
 	//switch case for handling selection of pokemon
 	$('.charChoice').on('click', function() {
@@ -43,6 +45,7 @@ var characters = {
 			case "pickEnemy":
 				selectEnemy(this);
 				dynamic = "pokeBattle";
+				$('#battle').css("visibility", "visible")
 				break;
 			} 
 	});
@@ -52,6 +55,14 @@ var characters = {
 			pokeBattle();
 			attack++
 		} 
+	});
+	//gameReset
+	$('#reset').on('click', function() {
+		var dynamic = "pickPokemon",
+			yourPokemon,
+			enemyPokemon,
+			attack = 1;
+			$('#battle').css("visibility", "hidden");
 	});
 
 	//select user Pokemon
@@ -72,40 +83,37 @@ var characters = {
 		$("#message").html("You chose: " + enemyPokemon.name + "<p>Click Attack!! to begin Poke BATTLE!!!</p>");
 	}
 
-	//check if you win or lose
-	function checkWinLose() {
-		if(yourPokemon.hp <= 0) {
-			$(".battleMsg").html(yourPokemon.name + "has fainted. Try Again");
-		}
-		if(enemyPokemon.hp <= 0){
-			$(".battleMsg").html(enemyPokemon.name + "has been defeated. <p>Pick your next enemy!")
-		}
-	}
-
 	//fighting calculatons
 	function pokeBattle() {
-		//user Pokemon taking damage
-		yourPokemon.hp -= enemyPokemon.attack;
-		//enemy pokemon taking damage
 		var userMultipliedDmg;
-		if(attack == 1){
-			userMultipliedDmg = yourPokemon.attack;
-			enemyPokemon.hp -= yourPokemon.attack;
-			checkWinLose();
-		} else {
-			userMultipliedDmg = (yourPokemon.attack * attack);
-			enemyPokemon.hp -= (userMultipliedDmg);
-			checkWinLose();
-		}
-		//battle msg
-		$(".battleMsg").html(enemyPokemon.name + " hit " + yourPokemon.name + " for " + enemyPokemon.attack + " HP" +
+		if(yourPokemon.hp <= 0) {
+				$(".battleMsg").html(yourPokemon.name + " has fainted. Try Again");
+				$(".reset").append('<input class="button-primary" id="reset" type="button" value="Reset Game">');
+				dynamic = "pickEnemy"
+			} else if (enemyPokemon.hp <= 0) {
+				$(".battleMsg").html(enemyPokemon.name + " has been defeated. <p>Pick your next enemy!</p>")
+				$(".currentEnemy, .enemyHP").empty();
+				$(".reset").append('<input class="button-primary" id="reset" type="button" value="Reset Game">');
+				dynamic = "pickEnemy"
+			} else if (attack == 1) {
+				yourPokemon.hp -= enemyPokemon.attack;
+				userMultipliedDmg = yourPokemon.attack;
+				enemyPokemon.hp -= yourPokemon.attack;
+				battleMsg();		
+			} else {
+				yourPokemon.hp -= enemyPokemon.attack;
+				userMultipliedDmg = (yourPokemon.attack * attack);
+				enemyPokemon.hp -= (userMultipliedDmg);
+				battleMsg();
+			}
+		//fighting status
+		function battleMsg() {
+			$(".battleMsg").html(enemyPokemon.name + " hit " + yourPokemon.name + " for " + enemyPokemon.attack + " HP" +
 							 "<p>" + yourPokemon.name + " hit " + enemyPokemon.name + " for " + userMultipliedDmg + " HP" + "</p>");
-		$(".hp").html(yourPokemon.hp + " HP");
-		$(".enemyHP").html(enemyPokemon.hp + " HP");
+			$(".hp").html(yourPokemon.hp + " HP");
+			$(".enemyHP").html(enemyPokemon.hp + " HP");
+			}
 	}
-
-	
-
 
 });
 
