@@ -1,4 +1,4 @@
-
+$(function() {
 
 //VARIABLES
 	//event for switch/case
@@ -6,6 +6,8 @@ var dynamic = "pickPokemon",
 	//variables to hold user and enemy pokemon stats
 	yourPokemon,
 	enemyPokemon;
+	//counter for button clicks
+var attack = 1;
 // Characters and Stats
 var characters = {
 	pikachu: {
@@ -29,7 +31,7 @@ var characters = {
 	attack: 25,
 	}
 };
-$(function() {
+
 	//switch case for handling selection of pokemon
 	$('.charChoice').on('click', function() {
 		switch(dynamic) {
@@ -48,6 +50,7 @@ $(function() {
 	$('#battle').on('click', function() {
 		if (dynamic == "pokeBattle") {
 			pokeBattle();
+			attack++
 		} 
 	});
 
@@ -68,6 +71,42 @@ $(function() {
 		$(".enemyHP").html(enemyPokemon.hp + " HP");
 		$("#message").html("You chose: " + enemyPokemon.name + "<p>Click Attack!! to begin Poke BATTLE!!!</p>");
 	}
+
+	//check if you win or lose
+	function checkWinLose() {
+		if(yourPokemon.hp <= 0) {
+			$(".battleMsg").html(yourPokemon.name + "has fainted. Try Again");
+		}
+		if(enemyPokemon.hp <= 0){
+			$(".battleMsg").html(enemyPokemon.name + "has been defeated. <p>Pick your next enemy!")
+		}
+	}
+
+	//fighting calculatons
+	function pokeBattle() {
+		//user Pokemon taking damage
+		yourPokemon.hp -= enemyPokemon.attack;
+		//enemy pokemon taking damage
+		var userMultipliedDmg;
+		if(attack == 1){
+			userMultipliedDmg = yourPokemon.attack;
+			enemyPokemon.hp -= yourPokemon.attack;
+			checkWinLose();
+		} else {
+			userMultipliedDmg = (yourPokemon.attack * attack);
+			enemyPokemon.hp -= (userMultipliedDmg);
+			checkWinLose();
+		}
+		//battle msg
+		$(".battleMsg").html(enemyPokemon.name + " hit " + yourPokemon.name + " for " + enemyPokemon.attack + " HP" +
+							 "<p>" + yourPokemon.name + " hit " + enemyPokemon.name + " for " + userMultipliedDmg + " HP" + "</p>");
+		$(".hp").html(yourPokemon.hp + " HP");
+		$(".enemyHP").html(enemyPokemon.hp + " HP");
+	}
+
+	
+
+
 });
 
 
