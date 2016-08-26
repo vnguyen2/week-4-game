@@ -8,12 +8,11 @@
 }
  
 h1 {
-	text-align: right;
 	font-size: 28px;
 }	
 
 img {
-	padding: 10px 10px;
+	margin: 20px 20px;
 }
 
 body {
@@ -26,24 +25,46 @@ body {
     font-family: 'pokemon_gbregular', Ariel, sans-serif;
 }
 
-div {
+/*div {
     margin-bottom: 15px;
-}
+}*/
+
 
 /*#pikachu, #charmander, #squirtle, #bulbasaur {
 	width: 150px;
 	margin: 0 , auto;
 }*/
+.button-primary {
+    margin-top: 20px;
+}
+.battleRow{
+    margin-top: 40px;
+}
+
+.userPokemon{
+    align: center;
+}
+
+.hp, .enemyHP {
+    background-color: black;
+    text-align: center;
+}
 
 .pokemon {
-    width:150px;
-    margin: 0 auto;
+    width:120px;
+    margin: 15px 15px;
 }
 
-.container {
-	padding: 40px 40px;
+#pikachuHealth, #squirtleHealth, #charmanderHealth, #bulbasaurHealth {
+    background-color: black;
+    padding: 0 auto;
 }
+
 
 .pikachu, .squirtle, .charmander, .bulbasaur {
     display: inline-block;
+}
+
+.enemies {
+    padding: 10px 10px;
 }

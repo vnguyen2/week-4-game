@@ -3,30 +3,48 @@
 	<meta charset="UTF-8">
 	<title>Pokemon RPG Game</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/skeleton.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	
 </head>
 <body>
 	<div class="container">
-			<h1>Pokemon RPG game</h1>	
-			<p>!! Choose your pokemon !!</p>
-		<div class="pikachu charChoice nonCharChoice">
-			<img src="assets/images/pikachu.png" class="pokemon">
+		<div class="row">
+			<div class="tweleve columns">
+				<h1>Pokemon RPG game</h1>	
+				<div id="message">!! Choose your pokemon !!</div>
+				<p class="enemyMsgs"></p>
+				<div class="enemies"></div>
+				<div class="userPick"></div>
+					<div class="pikachu charChoice" id="pikachu" >
+						<img src="assets/images/pikachu.png" class="pokemon charChoice">
+					</div>
+					<div class="squirtle charChoice" id="squirtle">
+						<img src="assets/images/squirtle.png" class="pokemon">
+					</div>
+					<div class="charmander charChoice" id="charmander">
+						<img src="assets/images/charmander.png" class="pokemon">
+					</div>
+					<div class="bulbasaur charChoice" id="bulbasaur">
+						<img src="assets/images/bulbasaur.png" class="pokemon">
+					</div>			
+			</div>
 		</div>
-		<div class="squirtle charChoice nonCharChoice">
-			<img src="assets/images/squirtle.png" class="pokemon">
-		</div>
-		<div class="charmander charChoice nonCharChoice">
-			<img src="assets/images/charmander.png" class="pokemon">
-		</div>
-		<div class="bulbasaur charChoice nonCharChoice">
-			<img src="assets/images/bulbasaur.png" class="pokemon">
-		</div>
-		<div class="userPick">
-		</div>
-		<div class="enemies">
-		</div>
-		<div class="defender">
+		<div class="row battleRow">
+			<div class="one-third column">
+					<div class="userPokemon"></div>
+					<div class="hp"></div>
+			</div>
+			<div class="one-third column">
+				<div class="attackInfo">
+					<input class="button-primary" id="battle" type="button" value="Attack!!">
+				</div>
+				<div class="battleMsg"></div>
+			</div>
+			<div class="one-third column">
+				<div class="currentEnemy"></div>
+				<div class="enemyHP"></div>
+			</div>
 		</div>
 	</div>
 
