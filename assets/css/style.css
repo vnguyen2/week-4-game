@@ -33,7 +33,7 @@ body {
     margin: 20px auto;
 }
 
-#battle {
+#battle, #reset {
     visibility: hidden;
 }
 
@@ -59,8 +59,4 @@ body {
 .pokemon {
     width: 120px;
     margin: 10px 10px;
-}
-
-.enemies {
-    padding: 10px 10px;
 }

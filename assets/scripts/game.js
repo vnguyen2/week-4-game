@@ -59,7 +59,8 @@ function gameReset() {
 			attack = 1;
 			$('#message').html("!! Choose your pokemon !!");
 			$('#characterHolder').html(characterReset);
-			$('.battleRow').empty();
+			$('.userPokemon, .userHP, .battleMsg, .currentEnemy, .enemyHP').empty();
+			$('#reset').css("visibility", "hidden");
 			document.querySelector('#recover').play();	
 	});
 };
@@ -85,7 +86,7 @@ function pickEnemy(enemy) {
 
 
   //on click functions
-	$('.charChoice').bind('click', function() {
+	$('.charChoice').on('click', function() {
 		switch(dynamic) {
 			case "pickPokemon":
 				pickPokemon(this);
@@ -104,9 +105,6 @@ function pickEnemy(enemy) {
 			pokeBattle();
 			attack++
 		} 
-		if (dynamic == "pickEnemy") {
-			gameReset();
-		}
 	});
 
 //fighting calculatons
@@ -137,17 +135,17 @@ function pokeBattle() {
 		//check for empty div where list of enemies were
 		if ( $('.charChoice').text().length == 0 && enemyPokemon.health <=0) {
 			$(".battleMsg").html(yourPokemon.name + " is victorious.");
-			$(".reset").append('<input class="button-primary" id="reset" type="button" value="Reset Game">');
+			$('#reset').css("visibility", "visible");
 				document.querySelector('#win').play();
 			$(".currentEnemy, .enemyHP, .userHP").empty();	
 			$('#battle').css("visibility", "hidden");
-				dynamic = "pickEnemy"
+				gameReset();
 		} else if (yourPokemon.health <= 0) {
 			$(".battleMsg").html(yourPokemon.name + " has fainted. Try Again");
-			$(".reset").append('<input class="button-primary" id="reset" type="button" value="Reset Game">');
+			$('#reset').css("visibility", "visible");
 			$('#battle').css("visibility", "hidden");
 			$(".userHP").empty();
-				dynamic = "pickEnemy"
+				gameReset();
 		} else if (enemyPokemon.health <= 0) {
 			$(".battleMsg").html(enemyPokemon.name + " has been defeated. <p>Pick your next enemy!</p>")
 			$(".currentEnemy, .enemyHP").empty();
