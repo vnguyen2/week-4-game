@@ -6,7 +6,7 @@ var dynamic = "pickPokemon",
 	//variables to hold user and enemy pokemon stats
 	yourPokemon,
 	enemyPokemon;
-//counter for button clicks
+//counter for button clicks for attk multiplier
 var attack = 1;
 // Characters and Stats
 var characters = {
@@ -32,18 +32,18 @@ var characters = {
 	}
 };
 
-var characterReset = '<div class="pikachu charChoice" id="pikachu" >' +
-						'<img src="assets/images/pikachu.png" class="pokemon charChoice">' +
-					'</div>' +
-					'<div class="squirtle charChoice" id="squirtle">' +
-						'<img src="assets/images/squirtle.png" class="pokemon">' +
-					'</div>' +
-					'<div class="charmander charChoice" id="charmander">' +
-						'<img src="assets/images/charmander.png" class="pokemon">' +
-					'</div>' +
-					'<div class="bulbasaur charChoice" id="bulbasaur">' +
-						'<img src="assets/images/bulbasaur.png" class="pokemon">' +
-					'</div>';		
+// var characterReset = '<div class="pikachu charChoice" id="pikachu" >' +
+// 						'<img src="assets/images/pikachu.png" class="pokemon circle">' +
+// 					'</div>' +
+// 					'<div class="squirtle charChoice" id="squirtle">' +
+// 						'<img src="assets/images/squirtle.png" class="pokemon circle">' +
+// 					'</div>' +
+// 					'<div class="charmander charChoice" id="charmander">' +
+// 						'<img src="assets/images/charmander.png" class="pokemon circle">' +
+// 					'</div>' +
+// 					'<div class="bulbasaur charChoice" id="bulbasaur">' +
+// 						'<img src="assets/images/bulbasaur.png" class="pokemon circle">' +
+// 					'</div>';		
 
 //bg music volume
 $("#bgMusic").prop("volume", 0.3);
@@ -52,17 +52,21 @@ $("#bgMusic").get(0).play();
 
 //gameReset	
 function gameReset() {
+	//VARIOUS reset attempts not working currently. will use onload until solution found
 	$('#reset').on('click', function() {
-		var dynamic = "pickPokemon",
-			yourPokemon,
-			enemyPokemon,
-			attack = 1;
-			$('#message').html("!! Choose your pokemon !!");
-			$('#characterHolder').html(characterReset);
-			$('.userPokemon, .userHP, .battleMsg, .currentEnemy, .enemyHP').empty();
-			$('#reset').css("visibility", "hidden");
-			document.querySelector('#recover').play();	
+	// 	var dynamic = "pickPokemon",
+	// 		yourPokemon,
+	// 		enemyPokemon,
+			// attack = 1;
+	// 		$('#message').html("!! Choose your pokemon !!");
+	// 		$('#characterHolder').html(characterReset);
+	// 		$('.userPokemon, .userHP, .battleMsg, .currentEnemy, .enemyHP').empty();
+	// 		$('#reset').css("visibility", "hidden");
+			// document.querySelector('#recover').play();	
+	location.reload();
 	});
+
+
 };
 
 
@@ -135,7 +139,7 @@ function pokeBattle() {
 		//check for empty div where list of enemies were
 		if ( $('.charChoice').text().length == 0 && enemyPokemon.health <=0) {
 			$(".battleMsg").html(yourPokemon.name + " is victorious.");
-			$('#reset').css("visibility", "visible");
+			$('#reset').css("visibility", "visible")
 				document.querySelector('#win').play();
 			$(".currentEnemy, .enemyHP, .userHP").empty();	
 			$('#battle').css("visibility", "hidden");

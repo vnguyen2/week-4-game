@@ -1,4 +1,4 @@
-
+/*
 @font-face {
     font-family: 'pokemon_gbregular';
     src: url('../fonts/pokemon_gb-webfont.woff2') format('woff2'),
@@ -33,6 +33,15 @@ body {
     margin: 20px auto;
 }
 
+.circle { 
+   width: 160px;
+   height: 160px;
+   background: #fff5c3; 
+   -moz-border-radius: 50px; 
+   -webkit-border-radius: 50px; 
+   border-radius: 40px;
+}
+
 #battle, #reset {
     visibility: hidden;
 }
@@ -41,6 +50,7 @@ body {
     margin-top: 40px;
     text-align: center;
 }
+
 .battleMsg {
     font-size: 11px;
     background-color: black;
@@ -58,5 +68,81 @@ body {
 
 .pokemon {
     width: 120px;
-    margin: 10px 10px;
+    height: 100px;
+    align: center;
+    margin: 20px 20px;
+}
+*/
+
+
+@font-face {
+    font-family: 'pokemon_gbregular';
+    src: url('../fonts/pokemon_gb-webfont.woff2') format('woff2'),
+         url('../fonts/pokemon_gb-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ 
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+}   
+
+img {
+    margin: 10px 20px;
+}
+
+body {
+    background: url('../images/pokeballBG.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #fff;
+    font-family: 'pokemon_gbregular', Ariel, sans-serif;
+    font-size: 14px;
+}
+
+.button-primary {
+    margin-top: 10px;
+    margin: 20px auto;
+}
+
+#battle, #reset {
+    visibility: hidden;
+}
+
+.battleRow {
+    margin-top: 40px;
+    text-align: center;
+}
+.battleMsg {
+    font-size: 11px;
+    background-color: black;
+    text-align: center;
+}
+.circle { 
+   width: 160px;
+   height: 160px;
+   background: #fff5c3; 
+   -moz-border-radius: 80px; 
+   -webkit-border-radius: 80px; 
+   border-radius: 50px;
+}
+
+.userHP, .enemyHP {
+    background-color: black;
+    text-align: center;
+}
+
+.charChoice {
+    display: inline-block;
+    margin: 20px 30px;
+}
+
+.pokemon {
+    width: 120px;
+    height: 100px;
+    margin: 25px 20px;
 }
