@@ -1,8 +1,6 @@
 $(function() {
 
 //VARIABLES
-var divClone = $('.container').clone();
-
 	//event for switch/case
 var dynamic = "pickPokemon",
 	//variables to hold user and enemy pokemon stats
@@ -14,7 +12,7 @@ var attack = 1;
 var characters = {
 	pikachu: {
 	name: "Pikachu",
-	health: 130,
+	health: 120,
 	attack: 8,
 	},
 	squirtle: {
@@ -25,28 +23,47 @@ var characters = {
 	bulbasaur: {
 	name: "Bulbasaur",
 	health: 150,
-	attack: 20,
+	attack: 15,
 	},
 	charmander: {
 	name: "Charmander",
-	health: 160,
-	attack: 25,
+	health: 180,
+	attack: 20,
 	}
 };
 
+var characterReset = '<div class="pikachu charChoice" id="pikachu" >' +
+						'<img src="assets/images/pikachu.png" class="pokemon charChoice">' +
+					'</div>' +
+					'<div class="squirtle charChoice" id="squirtle">' +
+						'<img src="assets/images/squirtle.png" class="pokemon">' +
+					'</div>' +
+					'<div class="charmander charChoice" id="charmander">' +
+						'<img src="assets/images/charmander.png" class="pokemon">' +
+					'</div>' +
+					'<div class="bulbasaur charChoice" id="bulbasaur">' +
+						'<img src="assets/images/bulbasaur.png" class="pokemon">' +
+					'</div>';		
 
-//gameReset
-	
+//bg music volume
+$("#bgMusic").prop("volume", 0.3);
+$("#bgMusic").get(0).play();
+
+
+//gameReset	
 function gameReset() {
 	$('#reset').on('click', function() {
 		var dynamic = "pickPokemon",
 			yourPokemon,
 			enemyPokemon,
 			attack = 1;
-			$('#battle').css("visibility", "hidden");
-			$('.container').replaceWith(divClone);
+			$('#message').html("!! Choose your pokemon !!");
+			$('#characterHolder').html(characterReset);
+			$('.battleRow').empty();
+			document.querySelector('#recover').play();	
 	});
 };
+
 
 	//pick user Pokemon
 function pickPokemon(user) {
@@ -63,10 +80,36 @@ function pickEnemy(enemy) {
 	$(enemy).removeClass('charChoice');
 		enemyPokemon = characters[enemy.id];
 	$(".enemyHP").html(enemyPokemon.health + " HP");
-	$("#message").html("You chose: " + enemyPokemon.name + "<p>Click Attack!! to begin Poke BATTLE!!!</p>");
+	$("#message").html("You chose " + enemyPokemon.name + " to attack." + "<p>Click Attack!! to begin Poke BATTLE!!!</p>");
 	};
 
-	//fighting calculatons
+
+  //on click functions
+	$('.charChoice').bind('click', function() {
+		switch(dynamic) {
+			case "pickPokemon":
+				pickPokemon(this);
+				dynamic = "pickEnemy";
+				break;
+			case "pickEnemy":
+				pickEnemy(this);
+				dynamic = "pokeBattle";
+				$('#battle').css("visibility", "visible")
+				break;
+			} 
+	});
+	//for when attack button is ready
+	$('#battle').on('click', function() {
+		if (dynamic == "pokeBattle") {
+			pokeBattle();
+			attack++
+		} 
+		if (dynamic == "pickEnemy") {
+			gameReset();
+		}
+	});
+
+//fighting calculatons
 function pokeBattle() {
 	var userMultipliedDmg;
 		winLose();
@@ -95,44 +138,24 @@ function pokeBattle() {
 		if ( $('.charChoice').text().length == 0 && enemyPokemon.health <=0) {
 			$(".battleMsg").html(yourPokemon.name + " is victorious.");
 			$(".reset").append('<input class="button-primary" id="reset" type="button" value="Reset Game">');
-			dynamic = "pickEnemy"
+				document.querySelector('#win').play();
+			$(".currentEnemy, .enemyHP, .userHP").empty();	
+			$('#battle').css("visibility", "hidden");
+				dynamic = "pickEnemy"
 		} else if (yourPokemon.health <= 0) {
 			$(".battleMsg").html(yourPokemon.name + " has fainted. Try Again");
 			$(".reset").append('<input class="button-primary" id="reset" type="button" value="Reset Game">');
-			dynamic = "pickEnemy"
+			$('#battle').css("visibility", "hidden");
+			$(".userHP").empty();
+				dynamic = "pickEnemy"
 		} else if (enemyPokemon.health <= 0) {
 			$(".battleMsg").html(enemyPokemon.name + " has been defeated. <p>Pick your next enemy!</p>")
 			$(".currentEnemy, .enemyHP").empty();
-			dynamic = "pickEnemy"
+				dynamic = "pickEnemy"
 		}
 	};	
 };
 
-
-//on click functions
-	$('.charChoice').on('click', function() {
-		switch(dynamic) {
-			case "pickPokemon":
-				pickPokemon(this);
-				dynamic = "pickEnemy";
-				break;
-			case "pickEnemy":
-				pickEnemy(this);
-				dynamic = "pokeBattle";
-				$('#battle').css("visibility", "visible")
-				break;
-			} 
-	});
-	//for when attack button is ready
-	$('#battle').on('click', function() {
-		if (dynamic == "pokeBattle") {
-			pokeBattle();
-			attack++
-		} 
-		if (dynamic == "pickEnemy") {
-			gameReset();
-		}
-	});
 });
 
 

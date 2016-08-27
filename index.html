@@ -8,11 +8,17 @@
 	
 </head>
 <body>
+
+<audio id="bgMusic" src="assets/audio/theme.mp3" loop="loop"></audio>	
+<audio id="win" src="assets/audio/victory.mp3"></audio>
+<audio id="recover" src="assets/audio/reset.mp3"></audio>
+
+	<h1>Pokemon RPG game!</h1>
 	<div class="container">
 		<div class="row">
 			<div class="tweleve columns">
-				<h1>Pokemon RPG game</h1>	
-				<div id="message">!! Choose your pokemon !!</div>		
+			<div id="message">!! Choose your pokemon !!</div>
+				<div id="characterHolder">		
 					<div class="pikachu charChoice" id="pikachu" >
 						<img src="assets/images/pikachu.png" class="pokemon charChoice">
 					</div>
@@ -24,7 +30,8 @@
 					</div>
 					<div class="bulbasaur charChoice" id="bulbasaur">
 						<img src="assets/images/bulbasaur.png" class="pokemon">
-					</div>		
+					</div>	
+				</div>	
 			</div>
 		</div>
 		<div class="row battleRow">
