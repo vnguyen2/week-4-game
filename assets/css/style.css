@@ -38,34 +38,29 @@ body {
 
 .battleRow {
     margin-top: 40px;
+    text-align: center;
 }
 .battleMsg {
     font-size: 11px;
     background-color: black;
     text-align: center;
 }
-.userPokemon{
+/*.userPokemon{
     align: center;
-}
+}*/
 
-.hp, .enemyHP {
+.userHP, .enemyHP {
     background-color: black;
     text-align: center;
+}
+
+.charChoice {
+    display: inline-block;
 }
 
 .pokemon {
     width: 120px;
     margin: 10px 10px;
-}
-
-#pikachuHealth, #squirtleHealth, #charmanderHealth, #bulbasaurHealth {
-    background-color: black;
-    padding: 0 auto;
-}
-
-
-.pikachu, .squirtle, .charmander, .bulbasaur {
-    display: inline-block;
 }
 
 .enemies {
